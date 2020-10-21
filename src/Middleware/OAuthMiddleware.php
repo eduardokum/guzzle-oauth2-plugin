@@ -2,6 +2,7 @@
 
 namespace Sainsburys\Guzzle\Oauth2\Middleware;
 
+use phpDocumentor\Reflection\Types\Callable_;
 use Sainsburys\Guzzle\Oauth2\AccessToken;
 use Sainsburys\Guzzle\Oauth2\GrantType\GrantTypeBase;
 use Sainsburys\Guzzle\Oauth2\GrantType\GrantTypeInterface;
@@ -53,10 +54,10 @@ class OAuthMiddleware
     /**
      * {@inheritdoc}
      */
-    public function onBefore()
+    public function onBefore($callable = null)
     {
-        return function (callable $handler) {
-            return function (RequestInterface $request, array $options) use ($handler) {
+        return function (callable $handler) use ($callable) {
+            return function (RequestInterface $request, array $options) use ($handler, $callable) {
                 if (
                     isset($options['auth']) &&
                     'oauth2' == $options['auth'] &&
@@ -64,11 +65,16 @@ class OAuthMiddleware
                     $this->grantType->getConfigByName(GrantTypeBase::CONFIG_TOKEN_URL) != $request->getUri()->getPath()
                 ) {
                     $token = $this->getAccessToken();
+                    
+                    if (is_callable($callable)) {
+                        call_user_func_array($callable, [$this]);
+                    }
+                    
                     if ($token !== null) {
                         return $handler($request->withAddedHeader('Authorization', 'Bearer '.$token->getToken()), $options);
                     }
                 }
-
+                
                 return $handler($request, $options);
             };
         };
