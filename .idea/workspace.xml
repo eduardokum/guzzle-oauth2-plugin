@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4eb4354c-9e31-4a54-b07d-42d0f8c364ef" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GrantType/JwtBearer.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Middleware/OAuthMiddleware.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Middleware/OAuthMiddleware.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/GrantType/JwtBearerTest.php" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +79,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1603281281248</updated>
-      <workItem from="1603281282348" duration="378000" />
+      <workItem from="1603281282348" duration="1077000" />
     </task>
     <servers />
   </component>

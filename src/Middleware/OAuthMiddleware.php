@@ -2,6 +2,7 @@
 
 namespace Sainsburys\Guzzle\Oauth2\Middleware;
 
+use Exception;
 use phpDocumentor\Reflection\Types\Callable_;
 use Sainsburys\Guzzle\Oauth2\AccessToken;
 use Sainsburys\Guzzle\Oauth2\GrantType\GrantTypeBase;
@@ -65,10 +66,13 @@ class OAuthMiddleware
                     $this->grantType->getConfigByName(GrantTypeBase::CONFIG_TOKEN_URL) != $request->getUri()->getPath()
                 ) {
                     $token = $this->getAccessToken();
-                    
-                    if (is_callable($callable)) {
-                        call_user_func_array($callable, [$this]);
-                    }
+
+                    try {
+                        if (!is_null($callable)) {
+                            call_user_func_array($callable, [$this]);
+                        }
+                    } catch (Exception $e) {}
+
                     
                     if ($token !== null) {
                         return $handler($request->withAddedHeader('Authorization', 'Bearer '.$token->getToken()), $options);
