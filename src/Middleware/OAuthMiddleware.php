@@ -55,7 +55,7 @@ class OAuthMiddleware
     /**
      * {@inheritdoc}
      */
-    public function onBefore($callable = null)
+    public function onBefore(callable $callable = null)
     {
         return function (callable $handler) use ($callable) {
             return function (RequestInterface $request, array $options) use ($handler, $callable) {
